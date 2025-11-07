@@ -1,0 +1,36 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: ".tests /split_at_first_digit_test.py"
+      id: tests-split_at_first_digit_test-py
+      uses: classroom-resources/autograding-python-grader@v1
+      with:
+        timeout: 10
+        max-score: 5
+        setup-command: ''
+    - name: ".tests /split_before_each_uppercases_test.py"
+      id: tests-split_before_each_uppercases_test-py
+      uses: classroom-resources/autograding-python-grader@v1
+      with:
+        timeout: 10
+        max-score: 5
+        setup-command: ''
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TESTS-SPLIT_AT_FIRST_DIGIT_TEST-PY_RESULTS: "${{steps.tests-split_at_first_digit_test-py.outputs.result}}"
+        TESTS-SPLIT_BEFORE_EACH_UPPERCASES_TEST-PY_RESULTS: "${{steps.tests-split_before_each_uppercases_test-py.outputs.result}}"
+      with:
+        runners: tests-split_at_first_digit_test-py,tests-split_before_each_uppercases_test-py
