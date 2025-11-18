@@ -10,7 +10,7 @@ def split_before_each_uppercase(sigma):
 
     
 
-def split_at_digit(formula):
+def split_at_first_digit(formula):
     digit_location = len(formula)
     for i, char in enumerate(formula):
         if char.isdigit():
