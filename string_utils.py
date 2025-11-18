@@ -1,25 +1,24 @@
-def split_before_each_uppercase(sigma):
-    start = 0
-    split_formula = []
-    for end in range(1, len(sigma)):
-        if sigma[end].isupper():
-            split_formula.append(sigma[start:end])
-            start = end
-    split_formula.append(sigma[start:])
-    return split_formula
-
-    
-
+def split_before_each_uppercases(formula):
+    t = []
+    splited_formula = []
+    for char in formula:
+        if char.isupper():
+            if t:
+                splited_formula.append(''.join(t))
+            t = [char]
+        else:
+            t.append(char)
+    if t:
+        splited_formula.append(''.join(t))
+    return splited_formula
 def split_at_first_digit(formula):
-    digit_location = len(formula)
-    for i, char in enumerate(formula):
+    digits = []
+    letters = []
+    for char in formula:
         if char.isdigit():
-            digit_location = i
-            break
-    if digit_location == len(formula):
-        return formula, 1
-    else:
-        prefix = formula[:digit_location]
-        number = int(formula[digit_location:])
-        return prefix, number
-    
+            digits.append(char)
+        else:
+            letters.append(char)
+    if digits == []:
+        digits.append("1")
+    return ''.join(letters), int(''.join(digits))
