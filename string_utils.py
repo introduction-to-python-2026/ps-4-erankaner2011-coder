@@ -1,7 +1,7 @@
 def split_before_each_uppercase(sigma):
     start = 0
     split_formula = []
-    for end in range(1, len(s)):
+    for end in range(1, len(sigma)):
         if sigma[end].isupper():
             split_formula.append(sigma[start:end])
             start = end
