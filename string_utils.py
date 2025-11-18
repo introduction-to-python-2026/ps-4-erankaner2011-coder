@@ -1,4 +1,13 @@
-def split_before_each_uppercases(formula):
+def split_on_uppercase(sigma):
+    start = 0
+    split_formula = []
+    for end in range(1, len(s)):
+        if sigma[end].isupper():
+            split_formula.append(sigma[start:end])
+            start = end
+    split_formula.append(sigma[start:])
+    return split_formula
+
     
 
 def split_at_digit(formula):
