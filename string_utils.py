@@ -1,4 +1,4 @@
-def split_before_each_uppercase(formula)(sigma):
+def split_before_each_uppercase(sigma):
     start = 0
     split_formula = []
     for end in range(1, len(s)):
